@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { ReservationEntity } from '../reservations/reservations.entity';
 
 @Entity({ schema: 'public', name: 'producto' })
 export class ProductEntity extends BaseEntity {
@@ -30,6 +31,13 @@ export class ProductEntity extends BaseEntity {
         length: 60,
     })
     img: string;
+
+
+    @OneToMany(() => ReservationEntity, (reservation) => reservation.product, {
+		lazy: true,
+		cascade: true,
+	})
+	reservation: Promise<ReservationEntity[]>;
 
 
     constructor(productEntity?: Partial<ProductEntity>) {

@@ -34,8 +34,6 @@ export class ProductsService {
                 return ProductMapper.toDto(product);
             });
         } catch (error) {
-            console.log(error);
-            
             if (error instanceof NotFoundException) {
                 throw new NotFoundException();
             }

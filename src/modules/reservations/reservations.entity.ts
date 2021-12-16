@@ -16,7 +16,7 @@ export class ReservationEntity extends BaseEntity {
     @Column({
         name: 'cedula',
         type: 'varchar',
-        length: 60,
+        length: 13,
     })
     identificationCard: string;
 
@@ -54,7 +54,7 @@ export class ReservationEntity extends BaseEntity {
       })
       date: Date;
 
-    @OneToOne(
+    @ManyToOne(
         () => ProductEntity,
         product => product.id,
         { lazy: true, cascade: false },

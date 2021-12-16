@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { defaultConnection } from '@config';
-import { AppController } from './app.controller';
 import { ProductsModule } from './modules/products/products.module';
 import { AppService } from './app.service';
+import { ReservationsModule } from '@modules/reservations/reservations.module';
 
 
 @Module({
@@ -17,7 +17,8 @@ import { AppService } from './app.service';
       useFactory: defaultConnection,
       inject: [ConfigService],
     }),
-   ProductsModule
+   ProductsModule,
+   ReservationsModule
   ],
 	providers: [AppService],
 

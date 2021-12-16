@@ -9,7 +9,7 @@ export class CreateReservationRequestDto {
 
     @ApiProperty()
     @IsNotEmpty()
-    @Length(5, 60)
+    @Length(5, 13)
     identificationCard: string;
 
     @ApiProperty()

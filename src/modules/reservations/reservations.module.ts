@@ -1,7 +1,7 @@
+import { ReservationsService } from './reservations.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductsController } from './reservations.controller';
-import { ProductsService } from './reservations.service';
+import { ReservationController } from './reservations.controller';
 import { ReservationEntity } from './reservations.entity';
 
 @Module({
@@ -10,7 +10,7 @@ import { ReservationEntity } from './reservations.entity';
       ReservationEntity
     ]),
   ],
-  controllers: [ProductsController],
-  providers: [ProductsService],
+  controllers: [ReservationController],
+  providers: [ReservationsService],
 })
 export class ReservationsModule { }

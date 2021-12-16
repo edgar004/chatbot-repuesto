@@ -9,11 +9,12 @@ import { ProductEntity } from '@modules/products/products.entity';
 
 export class ReservationMapper {
 
-  public static async toDto(entity: ReservationEntity): Promise<ReservationResponseDto> {
+  public static async toDto(entity: ReservationEntity): Promise<ReservationResponseDto>{
     const dto = new ReservationResponseDto();
     dto.id = entity.id;
     dto.name = entity.name;
     dto.price = entity.price;
+    dto.amount= entity.amount;
     dto.product = ProductMapper.toDto(await entity.product);
     return dto;
   }
@@ -27,6 +28,7 @@ export class ReservationMapper {
     entity.price = dto.price;
     entity.product = Promise.resolve(new ProductEntity({ id: dto.idProduct }));
     entity.date = new Date();
+    entity.status=false;
     return entity;
   }
 
