@@ -38,6 +38,24 @@ export class ReservationsService {
         }
     }
 
+    /**
+        * delete reservation
+        * @param id {CreateReservationRequestDto}
+        * @returns {Promise<ReservationResponseDto>}
+        */
+     public async deleteReservation(id: string): Promise<Boolean> {
+        try {
+            await this.ReservationRepository.delete(id);
+            return true;
+        } catch (error) {
+            if (error instanceof TimeoutError) {
+                throw new RequestTimeoutException();
+            } else {
+                throw new InternalServerErrorException();
+            }
+        }
+    }
+
 
     /**
     * Get a paginated reservations list
@@ -47,7 +65,6 @@ export class ReservationsService {
     public async getReservationsByIdentificationCard(identificationCard: string): Promise<ReservationResponseDto[]> {
         try {
             const reservations = await this.ReservationRepository.find({ identificationCard,status:false});
-            
             return await Promise.all(
                 reservations.map(ReservationMapper.toDto),
             );

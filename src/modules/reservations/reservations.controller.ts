@@ -5,6 +5,7 @@ import {
     Post,
     Get,
     Param,
+    Delete,
 } from '@nestjs/common';
 import {
     ApiInternalServerErrorResponse,
@@ -36,9 +37,25 @@ export class ReservationController {
     @ApiUnauthorizedResponse({ description: 'Not authenticated' })
     @ApiInternalServerErrorResponse({ description: 'Server error' })
     @Get(':identificationCard')
-    public getResegetReservationsByIdentificationCardrvationBy(@Param('identificationCard') identificationCard: string): Promise<ReservationResponseDto[]> {
-        return this.ReservationsService.getReservationsByIdentificationCard(identificationCard);
+    public  getResegetReservationsByIdentificationCardrvationBy(@Param('identificationCard') identificationCard: string): Promise<ReservationResponseDto[]> {
+        return  this.ReservationsService.getReservationsByIdentificationCard(identificationCard);
     }
+
+
+    @ApiOperation({ description: 'Get a paginated reservations list' })
+    @ApiOkResponse({
+        description: 'Reservation found', type: ReservationResponseDto,
+        isArray: true
+    })
+    @ApiNotFoundResponse({ description: 'Reservations not found' })
+    @ApiForbiddenResponse({ description: 'Access denied' })
+    @ApiUnauthorizedResponse({ description: 'Not authenticated' })
+    @ApiInternalServerErrorResponse({ description: 'Server error' })
+    @Delete(':id')
+    public  getCancelById(@Param('id') id: string): Promise<Boolean> {
+        return  this.ReservationsService.deleteReservation(id);
+    }
+
 
    
 
